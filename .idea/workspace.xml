@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca90fa87-2d32-425c-95c6-9ea86145aadb" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Entidades/Match.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Entidades/Team.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Entidades/Tournament.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Entidades/User.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Entidades/Equipo.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Entidades/EquipoFaseTorneo.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Entidades/FaseTorneo.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Entidades/Torneo.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Entidades/Usuario.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/TpTorneo.iml" afterPath="$PROJECT_DIR$/.idea/TpTorneo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Entidades/Match.py" afterPath="$PROJECT_DIR$/DataLayer/Match.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Entidades/Team.py" afterPath="$PROJECT_DIR$/DataLayer/Team.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Entidades/Tournament.py" afterPath="$PROJECT_DIR$/DataLayer/Tournament.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Entidades/User.py" afterPath="$PROJECT_DIR$/DataLayer/User.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,7 +20,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="User.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Entidades/User.py">
+        <entry file="file://$PROJECT_DIR$/DataLayer/User.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="10" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
@@ -39,7 +30,7 @@
         </entry>
       </file>
       <file leaf-file-name="Tournament.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Entidades/Tournament.py">
+        <entry file="file://$PROJECT_DIR$/DataLayer/Tournament.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
               <caret line="1" column="9" lean-forward="false" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
@@ -49,7 +40,7 @@
         </entry>
       </file>
       <file leaf-file-name="Team.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Entidades/Team.py">
+        <entry file="file://$PROJECT_DIR$/DataLayer/Team.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="10" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
@@ -59,7 +50,7 @@
         </entry>
       </file>
       <file leaf-file-name="Match.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Entidades/Match.py">
+        <entry file="file://$PROJECT_DIR$/DataLayer/Match.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
@@ -141,7 +132,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Entidades" />
+              <option name="myItemId" value="DataLayer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -351,7 +342,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Entidades/User.py">
+    <entry file="file://$PROJECT_DIR$/DataLayer/User.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
@@ -359,7 +350,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entidades/Tournament.py">
+    <entry file="file://$PROJECT_DIR$/DataLayer/Tournament.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="50" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
@@ -367,7 +358,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entidades/Team.py">
+    <entry file="file://$PROJECT_DIR$/DataLayer/Team.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
@@ -383,7 +374,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entidades/Match.py">
+    <entry file="file://$PROJECT_DIR$/DataLayer/Match.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -401,7 +392,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entidades/Team.py">
+    <entry file="file://$PROJECT_DIR$/DataLayer/Team.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="10" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
@@ -409,7 +400,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entidades/Match.py">
+    <entry file="file://$PROJECT_DIR$/DataLayer/Match.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
@@ -417,7 +408,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entidades/User.py">
+    <entry file="file://$PROJECT_DIR$/DataLayer/User.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="10" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
@@ -425,7 +416,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entidades/Tournament.py">
+    <entry file="file://$PROJECT_DIR$/DataLayer/Tournament.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="9" lean-forward="false" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
