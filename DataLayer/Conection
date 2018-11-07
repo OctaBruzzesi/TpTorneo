@@ -8,8 +8,6 @@ class Connection:
                              password='root',
                              db='tournaments')
             self.cur = self.conn.cursor()
-            print(self.cur.execute("SELECT * from user"))
-            print(self.cur.fetchone())
         except Exception as f:
             print("Error al ejecutar SQL " + str(f))
 
