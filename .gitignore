@@ -1,0 +1,10 @@
+.DS_Store
+Icon
+.tmtags
+.idea
+tags
+vendor.tags
+tmtagsHistory
+*.sublime-project
+*.sublime-workspace
+.bundle
