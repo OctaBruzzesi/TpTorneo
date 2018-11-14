@@ -58,9 +58,7 @@ CREATE TABLE `team` (
   `id_team` int(11) NOT NULL AUTO_INCREMENT,
   `team_name` varchar(45) NOT NULL,
   `id_user` int(11) NOT NULL,
-  PRIMARY KEY (`id_team`),
-  KEY `id_user_team_fk_idx` (`id_user`),
-  CONSTRAINT `id_user_team_fk` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`id_team`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -85,9 +83,7 @@ CREATE TABLE `tournament` (
   `tournament_name` varchar(45) NOT NULL,
   `contestants` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  PRIMARY KEY (`id_tournament`),
-  KEY `id_user_fk_idx` (`id_user`),
-  CONSTRAINT `id_user_fk` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`id_tournament`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -125,31 +121,6 @@ LOCK TABLES `tournament_team` WRITE;
 /*!40000 ALTER TABLE `tournament_team` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tournament_team` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
-  `user` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'facu','facu1'),(2,'mario','mario1'),(3,'octa','octa1');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -160,4 +131,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 19:41:07
+-- Dump completed on 2018-11-14 15:08:13
