@@ -1,9 +1,13 @@
 from tkinter import *
 from tkinter import ttk
+from Entities.Tournament import Tournament
+from BusinessLayer.BusinessLayerTournament import BusinessLayerTournament
 
 window = Tk()
 
 tree = ttk.Treeview(window)
+
+blt = BusinessLayerTournament()
 
 
 def create_tournament():
@@ -12,7 +16,8 @@ def create_tournament():
 
     def save():
         noti = Toplevel()
-        message_label = Label(master=noti, text="e").grid(row=0, column=0)
+        tournament = Tournament(None, name.get(), number_teams.get())
+        message_label = Label(master=noti, text=blt.create(tournament)).grid(row=0, column=0)
         form.destroy()
 
     form = Toplevel()
@@ -54,6 +59,12 @@ def delete_tournament(s):
 
 
 #actualizarDatos()
+def actualizarDatos():
+    pass
+    #for i in cns.todos():
+        #tree.insert("", 'end', text=i[0], values=(i[2], i[3], i[1]))
+
+
 tree["columns"]=("name","team_number")
 tree.heading('#0', text="Id")
 tree.column("name", width=150)
