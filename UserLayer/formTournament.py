@@ -9,7 +9,6 @@ tree = ttk.Treeview(window)
 
 blt = BusinessLayerTournament()
 
-
 def create_tournament():
     def abort():
         form.destroy()
@@ -58,12 +57,12 @@ def delete_tournament(s):
         tree.insert("", 'end', text=i[0], values=(i[2], i[3], i[1])) """
 
 
-#actualizarDatos()
-def actualizarDatos():
-    pass
-    #for i in cns.todos():
-        #tree.insert("", 'end', text=i[0], values=(i[2], i[3], i[1]))
 
+def actualizarDatos():
+    for i in blt.todos():
+        tree.insert("", 'end', text=i[0], values=(i[1], i[2]))
+
+actualizarDatos()
 
 tree["columns"]=("name","team_number")
 tree.heading('#0', text="Id")
