@@ -16,7 +16,14 @@ def create_tournament():
     def save():
         noti = Toplevel()
         tournament = Tournament(None, name.get(), number_teams.get())
-        message_label = Label(master=noti, text=blt.create(tournament)).grid(row=0, column=0)
+        try:
+            blt.create(tournament)
+            actualizarDatos()
+            noti.destroy()
+
+        except Exception as e:
+            print(e)
+            Label(master=noti, text=e).grid(row=0, column=0)
         form.destroy()
 
     form = Toplevel()
