@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from Entities.Tournament import Tournament
 from BusinessLayer.BusinessLayerTournament import BusinessLayerTournament
+from UserLayer.formTeam import FormTeam
 
 window = Tk()
 
@@ -20,11 +21,13 @@ def create_tournament():
             blt.create(tournament)
             actualizarDatos()
             noti.destroy()
+            FormTeam(tournament)
 
         except Exception as e:
             print(e)
             Label(master=noti, text=e).grid(row=0, column=0)
         form.destroy()
+
 
     form = Toplevel()
 
