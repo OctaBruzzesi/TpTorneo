@@ -10,6 +10,7 @@ class FormTeam:
     def __init__(self, tournament):
 
         self.selectedTeams = []
+        self.teams = blt.get_all()
 
         self.window = Tk()
 
@@ -93,11 +94,14 @@ class FormTeam:
         e_name.grid(row=0, column=1)
 
     def select_team(self):
+        #self.teams.remove()
         selectedTeam = self.tree.selection()
+        print(selectedTeam)
         id = self.tree.item(selectedTeam)
+        print(id)
         self.selectedTeams.append(id['text'])
         print(self.selectedTeams)
-        self.updateView()
+        #self.updateView()
 
     def remove_team(self):
         selectedTeam = self.treeSelected.selection()
@@ -109,8 +113,8 @@ class FormTeam:
 
     def updateView(self):
         self.tree.delete(*self.tree.get_children())
-        self.tree.delete(*self.tree.get_children())
+        #self.tree.delete(*self.tree.get_children())
         for i in blt.get_all():
             self.tree.insert("", 'end', text=i[0], values=(i[1]))
-        for i in self.selectedTeams:
-            self.treeSelected.insert("", "end", text=i[0], values=(i[1]))
+        #for i in self.selectedTeams:
+            #self.treeSelected.insert("", "end", text=i[0], values=(i[1]))
