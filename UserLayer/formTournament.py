@@ -22,11 +22,13 @@ def create_tournament():
             actualizarDatos()
             noti.destroy()
             FormTeam(tournament)
+            form.destroy()
 
         except Exception as e:
             print(e)
             Label(master=noti, text=e).grid(row=0, column=0)
-        form.destroy()
+            #form.destroy()
+
 
 
     form = Toplevel()

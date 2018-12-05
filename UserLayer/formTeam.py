@@ -9,17 +9,26 @@ blt = BusinessLayerTeam()
 class FormTeam:
     def __init__(self, tournament):
 
+        self.selectedTeams = []
+
         self.window = Tk()
 
         self.tree = ttk.Treeview(self.window)
 
-        self.tree["columns"] = ("name")
+        self.tree["columns"] = "name"
         self.tree.heading('#0', text="Id")
         self.tree.column("name", width=150)
         self.tree.heading("name", text="Nombre")
 
-        self.frame = Frame(self.window, width=500, height=100)
-        self.frame.grid(row=2, column=1, columnspan=3)
+        self.treeSelected = ttk.Treeview(self.window)
+
+        self.treeSelected["columns"] = "name"
+        self.treeSelected.heading('#0', text="Id")
+        self.treeSelected.column("name", width=150)
+        self.treeSelected.heading("name", text="Nombre")
+
+        self.frame = Frame(self.window, width=1500, height=100)
+        self.frame.grid(row=2, column=1)
 
         self.button_save = Button(self.frame, text='Alta', command=self.create_team)
         self.button_save.pack(side='left')
@@ -30,7 +39,17 @@ class FormTeam:
         self.button_update = Button(self.frame, text='Modificación')
         self.button_update.pack(side='left')
 
+        self.selectFrame = Frame(self.window, width=150, height=300)
+        self.selectFrame.grid(row=1, column=2)
+
+        self.button_select = Button(self.selectFrame, text='Seleccionar', command=self.select_team)
+        self.button_select.pack(side='left')
+
+        self.button_remove = Button(self.selectFrame, text='Eliminar', command=self.remove_team)
+        self.button_remove.pack(side='left')
+
         self.tree.grid(row=1, column=1)
+        self.treeSelected.grid(row=1, column=3)
         self.updateView()
         self.tournament = tournament
 
@@ -73,11 +92,25 @@ class FormTeam:
         e_name = Entry(form, textvariable=name)
         e_name.grid(row=0, column=1)
 
+    def select_team(self):
+        selectedTeam = self.tree.selection()
+        id = self.tree.item(selectedTeam)
+        self.selectedTeams.append(id['text'])
+        print(self.selectedTeams)
+        self.updateView()
+
+    def remove_team(self):
+        selectedTeam = self.treeSelected.selection()
+        id = self.treeSelected.item(selectedTeam)
+        self.selectedTeams.remove(id['text'])
+        print(self.selectedTeams)
+        self.updateView()
+
 
     def updateView(self):
         self.tree.delete(*self.tree.get_children())
+        self.tree.delete(*self.tree.get_children())
         for i in blt.get_all():
             self.tree.insert("", 'end', text=i[0], values=(i[1]))
-
-
-
+        for i in self.selectedTeams:
+            self.treeSelected.insert("", "end", text=i[0], values=(i[1]))
