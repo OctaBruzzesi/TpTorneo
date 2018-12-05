@@ -69,7 +69,7 @@ def delete_tournament(s):
 
 
 def actualizarDatos():
-    for i in blt.todos():
+    for i in blt.get_all():
         tree.insert("", 'end', text=i[0], values=(i[1], i[2]))
 
 actualizarDatos()

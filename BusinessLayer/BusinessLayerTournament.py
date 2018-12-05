@@ -22,5 +22,5 @@ class BusinessLayerTournament:
         except Exception as e:
             return e
 
-    def todos(self):
+    def get_all(self):
         return (dlt.list_tournaments())

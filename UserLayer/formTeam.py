@@ -76,7 +76,7 @@ class FormTeam:
 
     def updateView(self):
         self.tree.delete(*self.tree.get_children())
-        for i in blt.todos():
+        for i in blt.get_all():
             self.tree.insert("", 'end', text=i[0], values=(i[1]))
 
 

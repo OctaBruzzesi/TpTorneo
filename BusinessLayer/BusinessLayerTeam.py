@@ -14,10 +14,9 @@ class BusinessLayerTeam:
             if len(team.team_name) < 3:
                 raise Exception("El nombre debe tener mas de 3 caracteres")
             else:
-                print('estoy')
                 return self.dlt.create_team(team)
         except Exception as e:
             return e
 
-    def todos(self):
+    def get_all(self):
         return (self.dlt.list_teams())
