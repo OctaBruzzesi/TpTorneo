@@ -94,13 +94,15 @@ class FormTeam:
         e_name.grid(row=0, column=1)
 
     def select_team(self):
-        #self.teams.remove()
-        selectedTeam = self.tree.selection()
-        print(selectedTeam)
-        id = self.tree.item(selectedTeam)
-        print(id)
-        self.selectedTeams.append(id['text'])
-        print(self.selectedTeams)
+        print(self.teams)
+        selection = self.tree.selection()
+        selectedTeam = self.tree.item(selection)
+        team = Team(selectedTeam['text'], selectedTeam['values'][0])
+
+        #self.teams.remove(team)
+        self.selectedTeams.append(team)
+        for i in self.selectedTeams:
+            print(i.team_name)
         #self.updateView()
 
     def remove_team(self):
@@ -115,6 +117,6 @@ class FormTeam:
         self.tree.delete(*self.tree.get_children())
         #self.tree.delete(*self.tree.get_children())
         for i in blt.get_all():
-            self.tree.insert("", 'end', text=i[0], values=(i[1]))
+            self.tree.insert("", 'end', text=i.id, values=(i.team_name))
         #for i in self.selectedTeams:
             #self.treeSelected.insert("", "end", text=i[0], values=(i[1]))

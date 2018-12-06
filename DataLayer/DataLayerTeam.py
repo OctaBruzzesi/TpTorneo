@@ -20,5 +20,6 @@ class DataLayerTeam:
         self.con.execute(query)
         t = self.con.cur.fetchall()
         for i in t:
-            teams.append(i)
+            teams.append(Team(i[0], i[1]))
+        print(teams)
         return teams
