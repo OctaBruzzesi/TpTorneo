@@ -20,3 +20,6 @@ class BusinessLayerTeam:
 
     def get_all(self):
         return (self.dlt.list_teams())
+
+    def get_team(self, id):
+        return self.dlt.get_team(id)
