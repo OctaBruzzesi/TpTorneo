@@ -8,9 +8,10 @@ class DataLayerTeam:
         self.con = Connection()
 
     def create_team(self, team):
-        query = "INSERT INTO team(tournament_name) values({0})".format(repr(team.team_name))
+        query = "INSERT INTO team(team_name) values({0})".format(repr(team.team_name))
         self.con.execute(query)
         id = self.con.cur.lastrowid
+        print('e')
         return Team(id, team.team_name)
 
     def list_teams(self):
@@ -19,5 +20,6 @@ class DataLayerTeam:
         self.con.execute(query)
         t = self.con.cur.fetchall()
         for i in t:
-            teams.append(i)
+            teams.append(Team(i[0], i[1]))
+        print(teams)
         return teams
