@@ -11,7 +11,6 @@ class DataLayerTeam:
         query = "INSERT INTO team(team_name) values({0})".format(repr(team.team_name))
         self.con.execute(query)
         id = self.con.cur.lastrowid
-        print('e')
         return Team(id, team.team_name)
 
     def list_teams(self):
@@ -23,3 +22,12 @@ class DataLayerTeam:
             teams.append(Team(i[0], i[1]))
         print(teams)
         return teams
+
+    def get_team(self, id):
+        query = "SELECT * FROM team where id_team = {0}".format(id)
+        self.con.execute(query)
+        t = self.con.cur.fetchone()
+        print(t)
+        team = Team(t[0],t[1])
+        print(team)
+        return team

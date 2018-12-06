@@ -96,24 +96,28 @@ class FormTeam:
     def select_team(self):
         selection = self.tree.selection()
         selectedTeam = self.tree.item(selection)
-        team = Team(selectedTeam['text'], selectedTeam['values'][0])
-
-        #self.teams.remove(team)
-        self.selectedTeams.append(team)
-        for i in self.selectedTeams:
-            print(i.team_name)
+        teamselec = Team(selectedTeam['text'], selectedTeam['values'][0])
+        self.selectedTeams.append(teamselec)
+        for i in self.teams:
+            if(i.id == selectedTeam['text']):
+                self.teams.remove(i)
+                break
         self.updateView()
 
     def remove_team(self):
-        selectedTeam = self.treeSelected.selection()
-        id = self.treeSelected.item(selectedTeam)
-        self.selectedTeams.remove(id['text'])
-        print(self.selectedTeams)
+        selection = self.treeSelected.selection()
+        selectedTeam = self.treeSelected.item(selection)
+        teamselec = Team(selectedTeam['text'], selectedTeam['values'][0])
+        self.teams.append(teamselec)
+        for i in self.selectedTeams:
+            if(i.id == selectedTeam['text']):
+                self.selectedTeams.remove(i)
+                break
         self.updateView()
 
 
     def updateView(self):
-        #self.tree.delete(*self.tree.get_children())
+        self.tree.delete(*self.tree.get_children())
         self.treeSelected.delete(*self.treeSelected.get_children())
         for i in self.teams:
             self.tree.insert("", 'end', text=i.id, values=(i.team_name))
