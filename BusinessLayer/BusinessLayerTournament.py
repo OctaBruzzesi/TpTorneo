@@ -21,5 +21,17 @@ class BusinessLayerTournament:
     def get_all(self):
         return (dlt.list_tournaments())
 
+    def get_tournament(self, id):
+        return (dlt.get_tournament(id))
+
+    def update(self, tournament):
+        if tournament.tournament_name is None:
+            raise Exception("El torneo debe tener nombre")
+        #if dlt.search(tournament.tournament_name) == True:
+            #raise Exception("Ya existe un torneo con ese nombre")
+        if len(tournament.tournament_name) < 3:
+            raise Exception("El nombre debe tener mas de 3 caracteres")
+        return dlt.update_tournament(tournament)
+
     def delete(self,id):
         dlt.delete(id)

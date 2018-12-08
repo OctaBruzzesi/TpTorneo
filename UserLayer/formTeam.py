@@ -37,7 +37,7 @@ class FormTeam:
         self.button_delete = Button(self.frame, text='Baja', command=self.delete_team)
         self.button_delete.pack(side='left')
 
-        self.button_update = Button(self.frame, text='Modificación')
+        self.button_update = Button(self.frame, text='Modificación', command=self.update_team)
         self.button_update.pack(side='left')
 
         self.selectFrame = Frame(self.window, width=150, height=300)
@@ -125,6 +125,51 @@ class FormTeam:
                 self.selectedTeams.remove(i)
                 break
         self.updateView()
+
+    def update_team(self):
+        def abort():
+            form.destroy()
+
+        def save():
+            noti = Toplevel()
+            try:
+                updated_team = blt.update(Team(team.id, name.get()))
+                for i in enumerate(self.teams):
+                    if self.teams[i[0]].id == updated_team.id:
+                        self.teams[i[0]] = updated_team
+
+                self.updateView()
+                noti.destroy()
+                form.destroy()
+
+            except Exception as e:
+                Label(master=noti, text=e).grid(row=0, column=0)
+
+        form = Toplevel()
+
+        label_nom = Label(form, text="Nuevo nombre del torneo")
+        label_nom.grid(row=0, column=0)
+
+        frame = Frame(form, width=50, height=10)
+        frame.grid(row=4, column=1, columnspan=1)
+
+        accept = Button(frame, text="Guardar", command=save)
+        accept.pack(side="left")
+        abort = Button(frame, text="Cancelar", command=abort)
+        abort.pack(side="left")
+
+        # Variables
+
+        selection = self.tree.selection()
+        selectedTeam = self.tree.item(selection)
+        id = selectedTeam['text']
+
+        team = blt.get_team(id)
+
+        name = StringVar(value=team.team_name)
+
+        e_name = Entry(form, textvariable=name)
+        e_name.grid(row=0, column=1)
 
 
     def updateView(self):

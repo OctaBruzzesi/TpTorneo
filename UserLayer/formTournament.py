@@ -51,7 +51,6 @@ def create_tournament():
     e_number_teams = Entry(form, textvariable=number_teams)
     e_number_teams.grid(row=1, column=1)
 
-
 def delete_tournament():
     noti = Toplevel()
     selection = tree.selection()
@@ -64,8 +63,49 @@ def delete_tournament():
     except Exception as e:
         Label(master=noti, text=e).grid(row=0, column=0)
 
+def update_tournament():
+    def abort():
+        form.destroy()
+
+    def save():
+        noti = Toplevel()
+        try:
+            blt.update(Tournament(tournament.id, name.get(), tournament.contestants))
+            actualizarDatos()
+            noti.destroy()
+            form.destroy()
+
+        except Exception as e:
+            Label(master=noti, text=e).grid(row=0, column=0)
+
+    form = Toplevel()
+
+    label_nom = Label(form, text="Nuevo nombre del torneo")
+    label_nom.grid(row=0, column=0)
+
+    frame = Frame(form, width=50, height=10)
+    frame.grid(row=4, column=1, columnspan=1)
+
+    accept = Button(frame, text="Guardar", command=save)
+    accept.pack(side="left")
+    abort = Button(frame, text="Cancelar", command=abort)
+    abort.pack(side="left")
+
+    #Variables
+
+    selection = tree.selection()
+    selectedTournament = tree.item(selection)
+    id = selectedTournament['text']
+
+    tournament = blt.get_tournament(id)
+
+    name = StringVar(value=tournament.tournament_name)
+
+    e_name = Entry(form, textvariable=name)
+    e_name.grid(row=0, column=1)
 
 def actualizarDatos():
+    tree.delete(*tree.get_children())
     for i in blt.get_all():
         tree.insert("", 'end', text=i[0], values=(i[1], i[2]))
 
