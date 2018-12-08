@@ -129,7 +129,7 @@ button_save.pack(side='left')
 button_delete = Button(frame, text='Baja', command=delete_tournament)
 button_delete.pack(side='left')
 
-button_update = Button(frame, text='Modificación')
+button_update = Button(frame, text='Modificación', command=update_tournament)
 button_update.pack(side='left')
 
 
