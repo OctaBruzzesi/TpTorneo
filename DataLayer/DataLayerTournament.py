@@ -23,7 +23,6 @@ class DataLayerTournament:
         return tournaments
 
     def update_tournament(self, tournament):
-        print(tournament.id, tournament.tournament_name)
         query = "UPDATE tournament set tournament_name = {0} WHERE id_tournament = {1}".format(repr(tournament.tournament_name), tournament.id)
         self.con.execute(query)
         return tournament

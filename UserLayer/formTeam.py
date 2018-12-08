@@ -79,10 +79,9 @@ class FormTeam:
                 self.teams = blt.get_all()
                 self.updateView()
                 noti.destroy()
-
+                form.destroy()
             except Exception as e:
                 Label(master=noti, text=e).grid(row=0, column=0)
-            form.destroy()
 
         form = Toplevel()
 

@@ -37,3 +37,12 @@ class DataLayerTeam:
     def delete_team(self, id):
         query = "DELETE FROM team WHERE id_team = {0}".format(id)
         self.con.execute(query)
+
+    def search_byName(self, name):
+        query = "SELECT * FROM team WHERE team_name = '{0}'".format(name)
+        self.con.execute(query)
+        t = self.con.cur.fetchone()
+        if t == None:
+            return False
+        else:
+            return True
