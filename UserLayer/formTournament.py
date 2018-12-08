@@ -25,7 +25,6 @@ def create_tournament():
             form.destroy()
 
         except Exception as e:
-            print(e)
             Label(master=noti, text=e).grid(row=0, column=0)
 
     form = Toplevel()
@@ -57,17 +56,13 @@ def delete_tournament():
     noti = Toplevel()
     selection = tree.selection()
     selectedTournament = tree.item(selection)
-    id = selectedTournament['text']
     try:
-        blt.delete(id)
+        blt.delete(selectedTournament['text'])
         tree.delete(*tree.get_children())
         actualizarDatos()
         Label(master=noti, text='torneo eliminado.').grid(row=0, column=0)
     except Exception as e:
         Label(master=noti, text=e).grid(row=0, column=0)
-
-def update_tournament():
-
 
 
 def actualizarDatos():
@@ -94,7 +89,7 @@ button_save.pack(side='left')
 button_delete = Button(frame, text='Baja', command=delete_tournament)
 button_delete.pack(side='left')
 
-button_update = Button(frame, text='Modificación', command=update_tournament)
+button_update = Button(frame, text='Modificación')
 button_update.pack(side='left')
 
 
