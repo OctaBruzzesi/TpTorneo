@@ -22,7 +22,20 @@ class DataLayerTournament:
             tournaments.append(i)
         return tournaments
 
-    def delete(self,id):
+    def update_tournament(self, tournament):
+        print(tournament.id, tournament.tournament_name)
+        query = "UPDATE tournament set tournament_name = {0} WHERE id_tournament = {1}".format(repr(tournament.tournament_name), tournament.id)
+        self.con.execute(query)
+        return tournament
+
+    def get_tournament(self, id):
+        query = "SELECT * FROM tournament where id_tournament = {0}".format(id)
+        self.con.execute(query)
+        t = self.con.cur.fetchone()
+        tournament = Tournament(t[0], t[1], t[2])
+        return tournament
+
+    def delete(self, id):
         query = "DELETE FROM tournament WHERE id_tournament = {0}".format(id)
         self.con.execute(query)
 
