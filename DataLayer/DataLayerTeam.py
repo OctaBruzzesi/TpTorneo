@@ -23,6 +23,11 @@ class DataLayerTeam:
         print(teams)
         return teams
 
+    def update_team(self, team):
+        query = "UPDATE team set team_name = {0} WHERE id_team= {1}".format(repr(team.team_name), team.id)
+        self.con.execute(query)
+        return team
+
     def get_team(self, id):
         query = "SELECT * FROM team where id_team = {0}".format(id)
         self.con.execute(query)
