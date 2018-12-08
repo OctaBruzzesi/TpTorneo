@@ -51,14 +51,12 @@ def create_tournament():
     e_number_teams = Entry(form, textvariable=number_teams)
     e_number_teams.grid(row=1, column=1)
 
-
 def delete_tournament():
     noti = Toplevel()
     selection = tree.selection()
     selectedTournament = tree.item(selection)
-    id = selectedTournament['text']
     try:
-        blt.delete(id)
+        blt.delete(selectedTournament['text'])
         tree.delete(*tree.get_children())
         actualizarDatos()
         Label(master=noti, text='torneo eliminado.').grid(row=0, column=0)
@@ -106,8 +104,6 @@ def update_tournament():
     e_name = Entry(form, textvariable=name)
     e_name.grid(row=0, column=1)
 
-
-
 def actualizarDatos():
     tree.delete(*tree.get_children())
     for i in blt.get_all():
@@ -133,7 +129,7 @@ button_save.pack(side='left')
 button_delete = Button(frame, text='Baja', command=delete_tournament)
 button_delete.pack(side='left')
 
-button_update = Button(frame, text='Modificación', command=update_tournament)
+button_update = Button(frame, text='Modificación')
 button_update.pack(side='left')
 
 

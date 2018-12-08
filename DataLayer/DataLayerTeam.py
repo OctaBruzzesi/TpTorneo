@@ -20,7 +20,6 @@ class DataLayerTeam:
         t = self.con.cur.fetchall()
         for i in t:
             teams.append(Team(i[0], i[1]))
-        print(teams)
         return teams
 
     def update_team(self, team):
@@ -32,7 +31,9 @@ class DataLayerTeam:
         query = "SELECT * FROM team where id_team = {0}".format(id)
         self.con.execute(query)
         t = self.con.cur.fetchone()
-        print(t)
         team = Team(t[0],t[1])
-        print(team)
         return team
+
+    def delete_team(self, id):
+        query = "DELETE FROM team WHERE id_team = {0}".format(id)
+        self.con.execute(query)
