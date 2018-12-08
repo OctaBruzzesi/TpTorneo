@@ -28,8 +28,6 @@ def create_tournament():
             print(e)
             Label(master=noti, text=e).grid(row=0, column=0)
 
-
-
     form = Toplevel()
 
     label_nom = Label(form, text="Nombre del torneo")
@@ -55,17 +53,20 @@ def create_tournament():
     e_number_teams.grid(row=1, column=1)
 
 
-def delete_tournament(s):
-    tournament = (tree.selection())
-    if tournament is None:
-        print("Aún no existen torneos")
-    else:
-        print(tournament.name)
+def delete_tournament():
+    noti = Toplevel()
+    selection = tree.selection()
+    selectedTournament = tree.item(selection)
+    id = selectedTournament['text']
+    try:
+        blt.delete(id)
+        tree.delete(*tree.get_children())
+        actualizarDatos()
+        Label(master=noti, text='torneo eliminado.').grid(row=0, column=0)
+    except Exception as e:
+        Label(master=noti, text=e).grid(row=0, column=0)
 
-
-"""def update():
-    for i in cns.todos():
-        tree.insert("", 'end', text=i[0], values=(i[2], i[3], i[1])) """
+def update_tournament():
 
 
 
@@ -93,7 +94,7 @@ button_save.pack(side='left')
 button_delete = Button(frame, text='Baja', command=delete_tournament)
 button_delete.pack(side='left')
 
-button_update = Button(frame, text='Modificación')
+button_update = Button(frame, text='Modificación', command=update_tournament)
 button_update.pack(side='left')
 
 

@@ -20,3 +20,6 @@ class BusinessLayerTournament:
 
     def get_all(self):
         return (dlt.list_tournaments())
+
+    def delete(self,id):
+        dlt.delete(id)

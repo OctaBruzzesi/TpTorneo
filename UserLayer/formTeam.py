@@ -54,8 +54,6 @@ class FormTeam:
         self.updateView()
         self.tournament = tournament
 
-        print(tournament)
-
     def create_team(self):
         def abort():
             form.destroy()
@@ -69,7 +67,6 @@ class FormTeam:
                 noti.destroy()
 
             except Exception as e:
-                print(e)
                 Label(master=noti, text=e).grid(row=0, column=0)
             form.destroy()
 

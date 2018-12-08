@@ -22,3 +22,8 @@ class DataLayerTournament:
             tournaments.append(i)
         return tournaments
 
+    def delete(self,id):
+        query = "DELETE FROM tournament WHERE id_tournament = {0}".format(id)
+        self.con.execute(query)
+
+
