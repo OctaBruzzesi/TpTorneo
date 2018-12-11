@@ -28,7 +28,7 @@ class BusinessLayerTournament:
     def start(self, tournament, teams):
         for i in teams:
             dlTournamentTeam.create_tournament_team(tournament.id, i.id)
-        return blm.create_matches(tournament.contestants, teams)
+        return blm.create_matches(tournament, teams)
 
     def get_tournament(self, id):
         return (dlt.get_tournament(id))
