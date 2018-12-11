@@ -1,6 +1,10 @@
 from DataLayer.DataLayerTournament import DataLayerTournament
+from DataLayer.DataLayerTournamentTeam import DataLayerTournamentTeam
+from BusinessLayer.BusinessLayerMatch import BusinessLayerMatch
 
 dlt = DataLayerTournament()
+dlTournamentTeam = DataLayerTournamentTeam()
+blm = BusinessLayerMatch()
 
 
 class BusinessLayerTournament:
@@ -20,6 +24,11 @@ class BusinessLayerTournament:
 
     def get_all(self):
         return (dlt.list_tournaments())
+
+    def start(self, tournament, teams):
+        for i in teams:
+            dlTournamentTeam.create_tournament_team(tournament.id, i.id)
+        return blm.create_matches(tournament, teams)
 
     def get_tournament(self, id):
         return (dlt.get_tournament(id))
