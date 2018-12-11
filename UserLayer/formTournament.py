@@ -16,9 +16,9 @@ def create_tournament():
 
     def save():
         noti = Toplevel()
-        tournament = Tournament(None, name.get(), number_teams.get())
+        tourna = Tournament(None, name.get(), number_teams.get())
         try:
-            blt.create(tournament)
+            tournament = blt.create(tourna)
             actualizarDatos()
             noti.destroy()
             FormTeam(tournament)

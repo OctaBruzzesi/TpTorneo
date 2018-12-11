@@ -1,11 +1,12 @@
 from tkinter import *
 from tkinter import ttk
+from BusinessLayer.BusinessLayerTournament import BusinessLayerTournament
 from BusinessLayer.BusinessLayerTeam import BusinessLayerTeam
 from Entities.Team import Team
 
 
 blt = BusinessLayerTeam()
-
+blTournament = BusinessLayerTournament()
 class FormTeam:
     def __init__(self, tournament):
 
@@ -48,6 +49,9 @@ class FormTeam:
 
         self.button_remove = Button(self.selectFrame, text='Eliminar', command=self.remove_team)
         self.button_remove.pack(side='left')
+
+        self.button_start = Button(self.frame, text='Comenzar torneo', command=self.start_tournament)
+        self.button_start.pack(side='left')
 
         self.tree.grid(row=1, column=1)
         self.treeSelected.grid(row=1, column=3)
@@ -170,6 +174,14 @@ class FormTeam:
         e_name = Entry(form, textvariable=name)
         e_name.grid(row=0, column=1)
 
+    def start_tournament(self):
+        print(self.tournament)
+        noti = Toplevel()
+        try:
+            blTournament.start(self.tournament, self.selectedTeams)
+
+        except Exception as e:
+            Label(master=noti, text=e).grid(row=0, column=0)
 
     def updateView(self):
         self.tree.delete(*self.tree.get_children())
