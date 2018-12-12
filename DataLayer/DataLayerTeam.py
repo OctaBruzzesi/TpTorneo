@@ -38,7 +38,7 @@ class DataLayerTeam:
         query = "UPDATE team SET habilitado = 0 WHERE id_team = {0}".format(id)
         self.con.execute(query)
 
-    def search_byName(self, name):
+    def search_by_name(self, name):
         query = "SELECT * FROM team WHERE team_name = '{0}' AND habilitado = 1".format(name)
         self.con.execute(query)
         t = self.con.cur.fetchone()

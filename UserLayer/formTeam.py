@@ -33,26 +33,26 @@ class FormTeam:
         self.frame = Frame(self.window, width=1500, height=100)
         self.frame.grid(row=2, column=1)
 
-        self.button_save = Button(self.frame, text='Alta', command=self.create_team)
-        self.button_save.pack(side='left')
+        self.button_save = Button(self.frame, text='Crear equipo', command=self.create_team)
+        self.button_save.pack(side=LEFT, padx=6, pady=2)
 
-        self.button_delete = Button(self.frame, text='Baja', command=self.delete_team)
-        self.button_delete.pack(side='left')
+        self.button_delete = Button(self.frame, text='Eliminar Equipo',fg="red", command=self.delete_team)
+        self.button_delete.pack(side=LEFT, padx=6, pady=2)
 
-        self.button_update = Button(self.frame, text='Modificación', command=self.update_team)
-        self.button_update.pack(side='left')
+        self.button_update = Button(self.frame, text='Editar Equipo', command=self.update_team)
+        self.button_update.pack(side=LEFT, padx=6, pady=2)
 
         self.selectFrame = Frame(self.window, width=150, height=300)
         self.selectFrame.grid(row=1, column=2)
 
-        self.button_select = Button(self.selectFrame, text='Seleccionar', command=self.select_team)
-        self.button_select.pack(side='left')
+        self.button_select = Button(self.selectFrame, text='>>>>>', command=self.select_team)
+        self.button_select.pack(side=LEFT, padx=6, pady=2)
 
-        self.button_remove = Button(self.selectFrame, text='Eliminar', command=self.remove_team)
-        self.button_remove.pack(side='left')
+        self.button_remove = Button(self.selectFrame,fg="red", text='<<<<<', command=self.remove_team)
+        self.button_remove.pack(side=LEFT, padx=6, pady=2)
 
         self.button_start = Button(self.frame, text='Comenzar torneo', command=self.start_tournament)
-        self.button_start.pack(side='left')
+        self.button_start.pack(side=LEFT, padx=6, pady=2)
 
         self.tree.grid(row=1, column=1)
         self.treeSelected.grid(row=1, column=3)
@@ -61,10 +61,13 @@ class FormTeam:
 
     def delete_team(self):
         selection = self.tree.selection()
-        selectedTournament = self.tree.item(selection)
+        selectedTeam = self.tree.item(selection)
         try:
-            blt.delete_team(selectedTournament['text'])
-            self.teams = blt.get_all()
+            blt.delete_team(selectedTeam['text'])
+            for i in self.teams:
+                if(i.id == selectedTeam['text']):
+                    self.teams.remove(i)
+                break
             self.updateView()
         except Exception as e:
             noti = Toplevel()
@@ -77,10 +80,12 @@ class FormTeam:
         def save():
             team = Team(None, name.get())
             try:
-                blt.create(team)
-                self.teams = blt.get_all()
+                newTeam = blt.create(team)
+                #self.teams = blt.get_all()
                 self.updateView()
                 form.destroy()
+                self.teams.append(newTeam)
+                self.updateView()
 
             except Exception as e:
                 noti = Toplevel()
@@ -148,6 +153,10 @@ class FormTeam:
                 self.updateView()
                 noti.destroy()
                 form.destroy()
+                for i in self.teams:
+                    if(i.id == selectedTeam['text']):
+                        self.teams.remove(i)
+                    break
 
             except Exception as e:
                 Label(master=noti, text=e).grid(row=0, column=0)
