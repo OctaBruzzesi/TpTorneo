@@ -3,6 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 from BusinessLayer.BusinessLayerTournament import BusinessLayerTournament
 from BusinessLayer.BusinessLayerTeam import BusinessLayerTeam
+from UserLayer.Rounds import Rounds
 from Entities.Team import Team
 
 blt = BusinessLayerTeam()
@@ -193,6 +194,7 @@ class FormTeam:
             try:
                 blTournament.start(self.tournament, self.selectedTeams)
                 self.window.destroy()
+                Rounds(self.tournament)
             except Exception as e:
                 noti = Toplevel()
                 Label(master=noti, text=e).grid(row=0, column=0)
