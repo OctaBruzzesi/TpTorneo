@@ -20,7 +20,7 @@ class DataLayerMatch:
         self.con.execute(query)
         t = self.con.cur.fetchall()
         for i in t:
-            matches.append(Match(i[0], i[1], i[2], i[3], i[4], i[5], i[6]))
+            matches.append(Match(i[0], i[1], i[2], i[3], i[4], i[5]))
         return matches
 
     def create_next_match(self, id_tournament, id_phase):

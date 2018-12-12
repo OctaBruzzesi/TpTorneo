@@ -69,19 +69,19 @@ class Rounds:
         # self.treeSecondRound.column("result", width=150)
         # self.treeSecondRound.heading("result", text="Resultado")
 
-        self.button_save = Button(self.window, text='Segunda Ronda')
+        self.button_save = Button(self.window, text='Segunda Ronda', command=lambda: self.show_matches((16, 31)))
         self.button_save.grid(row=0, column=0)
 
-        self.button_save = Button(self.window, text='Primera Ronda')
+        self.button_save = Button(self.window, text='Primera Ronda', command=lambda: self.show_matches((8, 15)))
         self.button_save.grid(row=1, column=0)
 
-        self.button_save = Button(self.window, text='Cuartos de Final')
+        self.button_save = Button(self.window, text='Cuartos de Final', command=lambda: self.show_matches((4, 7)))
         self.button_save.grid(row=0, column=1)
 
-        self.button_save = Button(self.window, text='Semi Final')
+        self.button_save = Button(self.window, text='Semi Final', command=lambda: self.show_matches((2, 3)))
         self.button_save.grid(row=1, column=1)
 
-        self.button_save = Button(self.window, text='Final', command=self.final)
+        self.button_save = Button(self.window, text='Final', command=lambda: self.show_matches((1, 1)))
         self.button_save.grid(row=2, column=0)
 
         #self.treeFinal.grid(row=1, column=1)
@@ -91,12 +91,12 @@ class Rounds:
         #self.treeSecondRound.grid(row=5, column=1)
 
         #self.updateView()
-        self.tournament = blTournament.get_tournament(99)
+        self.tournament = blTournament.get_tournament(98)
 
         self.window.mainloop()
 
-    def final(self):
-        FormMatch(Tournament(89, 'Torneo 75', 8), (1, 1))
+    def show_matches(self, range_matches):
+        FormMatch(self.tournament, range_matches)
 
     # def updateView(self):
         # self.tree.delete(*self.tree.get_children())

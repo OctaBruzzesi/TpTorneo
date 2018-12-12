@@ -13,7 +13,7 @@ blm = BusinessLayerMatch()
 
 
 class FormMatch:
-    def __init__(self, id_tournament, range_matches):
+    def __init__(self, tournament, range_matches):
 
         self.selectedTeams = []
         self.teams = blt.get_all()
@@ -39,7 +39,7 @@ class FormMatch:
         self.button_save = Button(self.frame, text='Resultado')
         self.button_save.pack(side="left")
 
-        self.tournament = blTournament.get_tournament(98)
+        self.tournament = tournament
 
         self.matches = blm.get_matches(self.tournament, range_matches)
 
@@ -49,5 +49,5 @@ class FormMatch:
 
     def updateView(self):
         self.tree.delete(*self.tree.get_children())
-        for i in range(self.rangeMatches[0], self.rangeMatches[1] + 1, 1):
-            self.tree.insert("", 'end', text=i.id, values=(i.team_name))
+        for i in self.matches:
+            self.tree.insert("", 'end', text=i.id, values=(i.team_1, i.team_2, i.winner_team))
