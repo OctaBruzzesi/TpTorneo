@@ -11,7 +11,7 @@ blt = BusinessLayerTeam()
 blTournament = BusinessLayerTournament()
 
 class Rounds:
-    def __init__(self):
+    def __init__(self, tournament):
 
         self.selectedTeams = []
         self.teams = blt.get_all()
@@ -91,7 +91,7 @@ class Rounds:
         #self.treeSecondRound.grid(row=5, column=1)
 
         #self.updateView()
-        self.tournament = blTournament.get_tournament(98)
+        self.tournament = tournament
 
         self.window.mainloop()
 
@@ -105,6 +105,3 @@ class Rounds:
         #     self.tree.insert("", 'end', text=i.id, values=(i.team_name))
         # for i in self.selectedTeams:
         #     self.treeSelected.insert("", 'end', text=i.id, values=(i.team_name))
-
-
-Rounds()
