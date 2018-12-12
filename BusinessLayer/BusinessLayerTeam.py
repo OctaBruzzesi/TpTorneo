@@ -8,7 +8,7 @@ class BusinessLayerTeam:
     def create(self, team):
             if team.team_name is None:
                 raise Exception("El equipo debe tener nombre")
-            if self.dlt.search_byName(team.team_name) == True:
+            if self.dlt.search_by_name(team.team_name):
                 raise Exception("Ya existe un equipo con ese nombre")
             if len(team.team_name) < 3:
                 raise Exception("El nombre debe tener mas de 3 caracteres")
