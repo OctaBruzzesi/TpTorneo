@@ -14,6 +14,7 @@ class FormTeam:
         self.teams = blt.get_all()
 
         self.window = Tk()
+        self.window.title('Seleccione los equipos')
 
         self.tree = ttk.Treeview(self.window)
 
@@ -59,14 +60,12 @@ class FormTeam:
         self.tournament = tournament
 
     def delete_team(self):
-
         selection = self.tree.selection()
         selectedTournament = self.tree.item(selection)
         try:
             blt.delete_team(selectedTournament['text'])
             self.teams = blt.get_all()
             self.updateView()
-
         except Exception as e:
             noti = Toplevel()
             Label(master=noti, text=e).grid(row=0, column=0)
@@ -82,11 +81,14 @@ class FormTeam:
                 self.teams = blt.get_all()
                 self.updateView()
                 form.destroy()
+
             except Exception as e:
                 noti = Toplevel()
+                noti.title('save de create')
                 Label(master=noti, text=e).grid(row=0, column=0)
 
         form = Toplevel()
+        form.title('form de create_team')
 
         label_nom = Label(form, text="Nombre del equipo")
         label_nom.grid(row=0, column=0)
@@ -136,6 +138,7 @@ class FormTeam:
 
         def save():
             noti = Toplevel()
+            noti.title('save')
             try:
                 updated_team = blt.update(Team(team.id, name.get()))
                 for i in enumerate(self.teams):
@@ -150,6 +153,7 @@ class FormTeam:
                 Label(master=noti, text=e).grid(row=0, column=0)
 
         form = Toplevel()
+        form.title('top level 1')
 
         label_nom = Label(form, text="Nuevo nombre del torneo")
         label_nom.grid(row=0, column=0)

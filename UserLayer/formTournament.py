@@ -23,7 +23,6 @@ def create_tournament():
             noti.destroy()
             FormTeam(tournament)
             form.destroy()
-            window.destroy()
 
         except Exception as e:
             Label(master=noti, text=e).grid(row=0, column=0)
