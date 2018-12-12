@@ -15,5 +15,20 @@ class BusinessLayerMatch:
         for i in range(1, phase + 1, 1):
             dlm.create_next_match(tournament.id, i)
 
+    def result(self, match, score_team_1, score_team_2):
+        if score_team_1 < 0 | score_team_2 < 0:
+            raise Exception("El puntaje debe ser mayor a 0")
+        if score_team_1 == score_team_2:
+            raise Exception("No puede haber empate")
+        matchResult = dlm.result(match, score_team_1, score_team_2)
+        if matchResult.score_team_1 > matchResult.score_team_2:
+            dlm.winner(matchResult, matchResult.team_1)
+        else:
+            dlm.winner(matchResult, matchResult.team_2)
+        return matchResult
+
+    def get_match(self, id):
+        return dlm.get_match(id)
+
     def get_matches(self, tournament, range_matches):
         return (dlm.get_matches(tournament, range_matches))
