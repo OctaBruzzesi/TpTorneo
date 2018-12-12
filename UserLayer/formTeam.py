@@ -1,9 +1,9 @@
 from tkinter import *
+from tkinter import messagebox
 from tkinter import ttk
 from BusinessLayer.BusinessLayerTournament import BusinessLayerTournament
 from BusinessLayer.BusinessLayerTeam import BusinessLayerTeam
 from Entities.Team import Team
-
 
 blt = BusinessLayerTeam()
 blTournament = BusinessLayerTournament()
@@ -14,6 +14,7 @@ class FormTeam:
         self.teams = blt.get_all()
 
         self.window = Tk()
+        self.window.title('Seleccione los equipos')
 
         self.tree = ttk.Treeview(self.window)
 
@@ -59,35 +60,35 @@ class FormTeam:
         self.tournament = tournament
 
     def delete_team(self):
-        noti = Toplevel()
         selection = self.tree.selection()
         selectedTournament = self.tree.item(selection)
         try:
             blt.delete_team(selectedTournament['text'])
             self.teams = blt.get_all()
             self.updateView()
-            Label(master=noti, text='equipo eliminado.').grid(row=0, column=0)
         except Exception as e:
+            noti = Toplevel()
             Label(master=noti, text=e).grid(row=0, column=0)
-
 
     def create_team(self):
         def abort():
             form.destroy()
 
         def save():
-            noti = Toplevel()
             team = Team(None, name.get())
             try:
                 blt.create(team)
                 self.teams = blt.get_all()
                 self.updateView()
-                noti.destroy()
                 form.destroy()
+
             except Exception as e:
+                noti = Toplevel()
+                noti.title('save de create')
                 Label(master=noti, text=e).grid(row=0, column=0)
 
         form = Toplevel()
+        form.title('form de create_team')
 
         label_nom = Label(form, text="Nombre del equipo")
         label_nom.grid(row=0, column=0)
@@ -102,21 +103,23 @@ class FormTeam:
 
         # Variables
         name = StringVar()
-        number_teams = IntVar()
 
         e_name = Entry(form, textvariable=name)
         e_name.grid(row=0, column=1)
 
     def select_team(self):
-        selection = self.tree.selection()
-        selectedTeam = self.tree.item(selection)
-        teamselec = Team(selectedTeam['text'], selectedTeam['values'][0])
-        self.selectedTeams.append(teamselec)
-        for i in self.teams:
-            if(i.id == selectedTeam['text']):
-                self.teams.remove(i)
-                break
-        self.updateView()
+        if(len(self.selectedTeams) < self.tournament.contestants):
+            selection = self.tree.selection()
+            selectedTeam = self.tree.item(selection)
+            teamselec = Team(selectedTeam['text'], selectedTeam['values'][0])
+            self.selectedTeams.append(teamselec)
+            for i in self.teams:
+                if(i.id == selectedTeam['text']):
+                    self.teams.remove(i)
+                    break
+            self.updateView()
+        else:
+            messagebox.showinfo("Aviso", "El toreno se creó para " + str(self.tournament.contestants)+ " equipos", parent=self.window)
 
     def remove_team(self):
         selection = self.treeSelected.selection()
@@ -135,6 +138,7 @@ class FormTeam:
 
         def save():
             noti = Toplevel()
+            noti.title('save')
             try:
                 updated_team = blt.update(Team(team.id, name.get()))
                 for i in enumerate(self.teams):
@@ -149,6 +153,7 @@ class FormTeam:
                 Label(master=noti, text=e).grid(row=0, column=0)
 
         form = Toplevel()
+        form.title('top level 1')
 
         label_nom = Label(form, text="Nuevo nombre del torneo")
         label_nom.grid(row=0, column=0)
@@ -175,13 +180,16 @@ class FormTeam:
         e_name.grid(row=0, column=1)
 
     def start_tournament(self):
-        print(self.tournament)
-        noti = Toplevel()
-        try:
-            blTournament.start(self.tournament, self.selectedTeams)
+        if(len(self.selectedTeams) == self.tournament.contestants):
+            try:
+                blTournament.start(self.tournament, self.selectedTeams)
+                self.window.destroy()
+            except Exception as e:
+                noti = Toplevel()
+                Label(master=noti, text=e).grid(row=0, column=0)
+        else:
+            messagebox.showinfo("Aviso", "El toreno se creó para " + str(self.tournament.contestants)+ " equipos", parent=self.window)
 
-        except Exception as e:
-            Label(master=noti, text=e).grid(row=0, column=0)
 
     def updateView(self):
         self.tree.delete(*self.tree.get_children())

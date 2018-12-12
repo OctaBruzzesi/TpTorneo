@@ -9,7 +9,7 @@ class BusinessLayerTeam:
             if team.team_name is None:
                 raise Exception("El equipo debe tener nombre")
             if self.dlt.search_byName(team.team_name) == True:
-                raise Exception("Ya existe un torneo con ese nombre")
+                raise Exception("Ya existe un equipo con ese nombre")
             if len(team.team_name) < 3:
                 raise Exception("El nombre debe tener mas de 3 caracteres")
             return self.dlt.create_team(team)

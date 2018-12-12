@@ -15,7 +15,7 @@ class DataLayerTeam:
 
     def list_teams(self):
         teams = []
-        query = "Select * From team"
+        query = "Select * From team WHERE habilitado = 1"
         self.con.execute(query)
         t = self.con.cur.fetchall()
         for i in t:
@@ -28,18 +28,18 @@ class DataLayerTeam:
         return team
 
     def get_team(self, id):
-        query = "SELECT * FROM team where id_team = {0}".format(id)
+        query = "SELECT * FROM team where id_team = {0} AND habilitado = 1".format(id)
         self.con.execute(query)
         t = self.con.cur.fetchone()
         team = Team(t[0],t[1])
         return team
 
     def delete_team(self, id):
-        query = "DELETE FROM team WHERE id_team = {0}".format(id)
+        query = "UPDATE team SET habilitado = 0 WHERE id_team = {0}".format(id)
         self.con.execute(query)
 
     def search_byName(self, name):
-        query = "SELECT * FROM team WHERE team_name = '{0}'".format(name)
+        query = "SELECT * FROM team WHERE team_name = '{0}' AND habilitado = 1".format(name)
         self.con.execute(query)
         t = self.con.cur.fetchone()
         if t == None:
