@@ -14,3 +14,6 @@ class BusinessLayerMatch:
             phase = phase - 1
         for i in range(1, phase + 1, 1):
             dlm.create_next_match(tournament.id, i)
+
+    def get_matches(self, tournament, range_matches):
+        return (dlm.get_matches(tournament, range_matches))
