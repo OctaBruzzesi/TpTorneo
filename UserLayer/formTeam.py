@@ -136,7 +136,7 @@ class FormTeam(Form):
                     break
             self.updateView()
         else:
-            messagebox.showinfo("Aviso", "El toreno se creó para " + str(self.tournament.contestants)+ " equipos", parent=self.window)
+            messagebox.showinfo("Aviso", "El torneo se creó para " + str(self.tournament.contestants)+ " equipos", parent=self.window)
 
     def remove_team(self):
         teamselec = super(FormTeam, self).get_select(self.treeSelected)

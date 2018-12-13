@@ -32,7 +32,7 @@ class Menu:
 
         button2 = ttk.Button(button_frame, text="Lista de Equipos", command=self.open_team)
         button2.pack()
-        
+
         button3 = ttk.Button(button_frame, text="Informes", command=self.reportes)
         button3.pack()
 
