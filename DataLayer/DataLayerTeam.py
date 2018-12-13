@@ -28,6 +28,8 @@ class DataLayerTeam:
         return team
 
     def get_team(self, id):
+        if id is None:
+            return Team(None, None)
         query = "SELECT * FROM team where id_team = {0} AND habilitado = 1".format(id)
         self.con.execute(query)
         t = self.con.cur.fetchone()

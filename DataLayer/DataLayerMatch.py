@@ -42,11 +42,9 @@ class DataLayerMatch:
         return Match(s[0], s[1], s[2], s[3], s[4], s[5], s[6])
 
     def is_match_done(self, id, id_phase):
-        print(id)
         query = "SELECT * FROM tournaments.match where id_tournament = {0} AND id_phase = {1}".format(id, id_phase)
         self.con.execute(query)
         s = self.con.cur.fetchone()
-        print(s[0], s[1], s[2])
         if s[5] is not None and s[6] is not None:
             return True
         return False
