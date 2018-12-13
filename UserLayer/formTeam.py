@@ -3,12 +3,17 @@ from tkinter import messagebox
 from tkinter import ttk
 from BusinessLayer.BusinessLayerTournament import BusinessLayerTournament
 from BusinessLayer.BusinessLayerTeam import BusinessLayerTeam
+from UserLayer.form import Form
 from UserLayer.Rounds import Rounds
 from Entities.Team import Team
 
+
+
+
+
 blt = BusinessLayerTeam()
 blTournament = BusinessLayerTournament()
-class FormTeam:
+class FormTeam(Form):
     def __init__(self, tournament, show_selection):
 
         self.selectedTeams = []
@@ -89,7 +94,6 @@ class FormTeam:
             team = Team(None, name.get())
             try:
                 newTeam = blt.create(team)
-                #self.teams = blt.get_all()
                 self.updateView()
                 form.destroy()
                 self.teams.append(newTeam)
@@ -122,12 +126,12 @@ class FormTeam:
 
     def select_team(self):
         if(len(self.selectedTeams) < self.tournament.contestants):
-            selection = self.tree.selection()
-            selectedTeam = self.tree.item(selection)
-            teamselec = Team(selectedTeam['text'], selectedTeam['values'][0])
+            selectedTeam = super(FormTeam, self).get_select(self.tree)
+            teamselec = blt.get_team(selectedTeam)
+
             self.selectedTeams.append(teamselec)
             for i in self.teams:
-                if(i.id == selectedTeam['text']):
+                if(i.id == teamselec.id):
                     self.teams.remove(i)
                     break
             self.updateView()
@@ -135,12 +139,11 @@ class FormTeam:
             messagebox.showinfo("Aviso", "El toreno se creó para " + str(self.tournament.contestants)+ " equipos", parent=self.window)
 
     def remove_team(self):
-        selection = self.treeSelected.selection()
-        selectedTeam = self.treeSelected.item(selection)
-        teamselec = Team(selectedTeam['text'], selectedTeam['values'][0])
-        self.teams.append(teamselec)
+        teamselec = super(FormTeam, self).get_select(self.treeSelected)
+        team = blt.get_team(teamselec)
+        self.teams.append(team)
         for i in self.selectedTeams:
-            if(i.id == selectedTeam['text']):
+            if(i.id == team.id):
                 self.selectedTeams.remove(i)
                 break
         self.updateView()
@@ -185,9 +188,7 @@ class FormTeam:
 
         # Variables
 
-        selection = self.tree.selection()
-        selectedTeam = self.tree.item(selection)
-        id = selectedTeam['text']
+        id = super(FormTeam, self).get_select(self.tree)
 
         team = blt.get_team(id)
 

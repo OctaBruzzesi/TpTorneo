@@ -4,10 +4,11 @@ from Entities.Tournament import Tournament
 from BusinessLayer.BusinessLayerTournament import BusinessLayerTournament
 from UserLayer.Rounds import Rounds
 from UserLayer.formTeam import FormTeam
+from UserLayer.form import Form
 
 blt = BusinessLayerTournament()
 
-class FormTournament:
+class FormTournament(Form):
     def __init__(self):
         self.window = Tk()
         self.window.title('Listado de Torneos')
@@ -83,19 +84,16 @@ class FormTournament:
         e_number_teams.grid(row=1, column=1)
 
     def continue_tournament(self):
-        selection = self.tree.selection()
-        selectedTournament = self.tree.item(selection)
-        id = selectedTournament['text']
+        id = super(FormTournament, self).get_select(self.tree)
 
         tournament = blt.get_tournament(id)
         Rounds(tournament)
 
     def delete_tournament(self):
         noti = Toplevel()
-        selection = self.tree.selection()
-        selectedTournament = self.tree.item(selection)
+        selectedTournament = super(FormTournament, self).get_select(self.tree)
         try:
-            blt.delete(selectedTournament['text'])
+            blt.delete(selectedTournament)
             self.tree.delete(*self.tree.get_children())
             self.actualizarDatos()
             Label(master=noti, text='torneo eliminado.').grid(row=0, column=0)
@@ -132,9 +130,7 @@ class FormTournament:
 
         #Variables
 
-        selection = self.tree.selection()
-        selectedTournament = self.tree.item(selection)
-        id = selectedTournament['text']
+        id = super(FormTournament, self).get_select(self.tree)
 
         tournament = blt.get_tournament(id)
 

@@ -3,8 +3,7 @@ from tkinter import ttk
 from BusinessLayer.BusinessLayerTournament import BusinessLayerTournament
 from BusinessLayer.BusinessLayerTeam import BusinessLayerTeam
 from BusinessLayer.BusinessLayerMatch import BusinessLayerMatch
-from Entities.Tournament import Tournament
-from Entities.Team import Team
+from UserLayer.form import Form
 
 
 blt = BusinessLayerTeam()
@@ -12,7 +11,7 @@ blTournament = BusinessLayerTournament()
 blm = BusinessLayerMatch()
 
 
-class FormMatch:
+class FormMatch(Form):
     def __init__(self, tournament, range_matches):
 
         self.selectedTeams = []
@@ -84,9 +83,8 @@ class FormMatch:
 
         # Variables
 
-        selection = self.tree.selection()
-        selectedMatch = self.tree.item(selection)
-        match = blm.get_match(selectedMatch['text'])
+        selectedMatch = super(FormMatch, self).get_select(self.tree)
+        match = blm.get_match(selectedMatch)
 
         score_team_1 = IntVar(value=0)
         score_team_2 = IntVar(value=0)

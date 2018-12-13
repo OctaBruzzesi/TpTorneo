@@ -15,10 +15,10 @@ class Menu:
 
         label = ttk.Label(title_frame, text="Tournaments")
         label.pack(pady=10, padx=125)
+        label.configure(background="#3BAFDA")
 
         button_frame = Frame(self.window, width=150)
         button_frame.grid(row=1, column=0, columnspan=3)
-        button_frame.configure(background="#3BAFDA")
 
         button = ttk.Button(button_frame, text="Lista de Torneos", command=self.open_tournament)
         button.pack()
