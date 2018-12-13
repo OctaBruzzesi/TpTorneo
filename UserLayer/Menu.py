@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from UserLayer.formTournament import FormTournament
+from UserLayer.formTeam import FormTeam
 from BusinessLayer.BusinessLayerMatch import BusinessLayerMatch
 from BusinessLayer.BusinessLayerTournament import  BusinessLayerTournament
 from BusinessLayer.BusinessLayerTeam import BusinessLayerTeam
@@ -15,16 +16,24 @@ class Menu:
         self.window = Tk()
         self.window.title('Menu')
 
-        label = ttk.Label(self.window, text="Start Page")
-        label.pack(pady=10, padx=125)
+        title_frame = Frame(self.window, width=150)
+        title_frame.grid(row=0, column=0, columnspan=3)
+        title_frame.configure(background="#4FC1E9")
 
-        button = ttk.Button(self.window, text="Lista de Torneos", command=self.open_tournament)
+        label = ttk.Label(title_frame, text="Tournaments")
+        label.pack(pady=10, padx=125)
+        label.configure(background="#3BAFDA")
+
+        button_frame = Frame(self.window, width=150)
+        button_frame.grid(row=1, column=0, columnspan=3)
+
+        button = ttk.Button(button_frame, text="Lista de Torneos", command=self.open_tournament)
         button.pack()
 
-        button2 = ttk.Button(self.window, text="Lista de Equipos")
+        button2 = ttk.Button(button_frame, text="Lista de Equipos", command=self.open_team)
         button2.pack()
 
-        button3 = ttk.Button(self.window, text="Informes", command=self.reportes)
+        button3 = ttk.Button(button_frame, text="Informes", command=self.reportes)
         button3.pack()
 
         self.window.mainloop()
@@ -77,5 +86,8 @@ class Menu:
 
     def open_tournament(self):
         FormTournament()
+
+    def open_team(self):
+        FormTeam(None, False)
 
 Menu()
