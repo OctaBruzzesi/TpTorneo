@@ -37,25 +37,22 @@ class Menu:
 
             tree = ttk.Treeview(vista)
 
-            tree.pack()
-
             tree["columns"] = ("name_team", "name_tournament")
             tree.heading('#0', text="Id")
             tree.column("name_team", width=150)
             tree.heading("name_team", text="Nombre del Equipo")
             tree.column("name_tournament", width=150)
             tree.heading("name_tournament", text="Nombre del Torneo")
+            tree.pack()
 
             finals = blm.get_finals()
-            print(finals[0].id, finals[0].score_team_1)
             for i in finals:
                 tournament = blt.get_tournament(i.id_tournament)
                 if i.score_team_1 > i.score_team_2:
                     team_win = bltm.get_team(i.team_1)
                 else:
                     team_win = bltm.get_team(i.team_2)
-                tree.insert("", 'end', text='Equipo', values=team_win.team_name)
-                tree.insert("", 'end', text=team_win.team_name, values=tournament.tournament_name)
+                tree.insert('', 'end', text='', values=(team_win.team_name,tournament.tournament_name))
 
         form = Toplevel()
         button = ttk.Button(form, text="Torneos Ganadores", command=tournaments_win)
