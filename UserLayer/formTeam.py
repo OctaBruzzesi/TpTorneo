@@ -143,6 +143,7 @@ class FormTeam(Form):
         team = blt.get_team(teamselec)
         self.teams.append(team)
         for i in self.selectedTeams:
+            
             if(i.id == team.id):
                 self.selectedTeams.remove(i)
                 break
