@@ -136,7 +136,5 @@ class FormTournament:
         for i in blt.get_all():
             self.tree.insert("", 'end', text=i[0], values=(i[1], i[2]))
 
-FormTournament()
-
 
 
