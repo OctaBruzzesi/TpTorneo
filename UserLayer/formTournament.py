@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from Entities.Tournament import Tournament
 from BusinessLayer.BusinessLayerTournament import BusinessLayerTournament
+from UserLayer.Rounds import Rounds
 from UserLayer.formTeam import FormTeam
 
 blt = BusinessLayerTournament()
@@ -31,6 +32,9 @@ class FormTournament:
 
         self.button_update = Button(self.frame, text='Editar torneo', command=self.update_tournament)
         self.button_update.pack(side=LEFT, padx=6, pady=2)
+
+        self.button_continue = Button(self.frame, text="Continuar torneo", command=self.continue_tournament)
+        self.button_continue.pack(side=LEFT, padx=6, pady=2)
 
         self.tree.grid(row=1, column=1)
         self.window.mainloop()
@@ -77,6 +81,14 @@ class FormTournament:
         e_name.grid(row=0, column=1)
         e_number_teams = Entry(form, textvariable=number_teams)
         e_number_teams.grid(row=1, column=1)
+
+    def continue_tournament(self):
+        selection = self.tree.selection()
+        selectedTournament = self.tree.item(selection)
+        id = selectedTournament['text']
+
+        tournament = blt.get_tournament(id)
+        Rounds(tournament)
 
     def delete_tournament(self):
         noti = Toplevel()
