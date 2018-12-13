@@ -16,6 +16,10 @@ class BusinessLayerMatch:
             dlm.create_next_match(tournament.id, i)
 
     def result(self, match, score_team_1, score_team_2):
+        if match.id_phase != 1:
+            id_next_phase = int(match.id_phase / 2)
+            if dlm.is_match_done(match.id_tournament, id_next_phase):
+                raise Exception("No se puede modificar el puntaje")
         if score_team_1 < 0 | score_team_2 < 0:
             raise Exception("El puntaje debe ser mayor a 0")
         if score_team_1 == score_team_2:

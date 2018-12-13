@@ -57,7 +57,6 @@ class FormMatch:
             noti = Toplevel()
             noti.title('Resultado')
             try:
-                print(type(score_team_1))
                 blm.result(match, score_team_1.get(), score_team_2.get())
                 self.updateView()
                 noti.destroy()
@@ -87,7 +86,6 @@ class FormMatch:
 
         selection = self.tree.selection()
         selectedMatch = self.tree.item(selection)
-        print(selectedMatch)
         match = blm.get_match(selectedMatch['text'])
 
         score_team_1 = IntVar(value=0)
@@ -97,9 +95,6 @@ class FormMatch:
         e_score_1.grid(row=0, column=1)
         e_score_2 = Entry(form, textvariable=score_team_2)
         e_score_2.grid(row=1, column=1)
-
-
-        print(match.id)
 
     def updateView(self):
         self.tree.delete(*self.tree.get_children())
