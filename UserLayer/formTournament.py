@@ -8,13 +8,14 @@ from UserLayer.form import Form
 
 blt = BusinessLayerTournament()
 
+
 class FormTournament(Form):
     def __init__(self):
         self.window = Tk()
         self.window.title('Listado de Torneos')
         self.tree = ttk.Treeview(self.window)
 
-        self.actualizarDatos()
+        self.update_view()
         self.tree["columns"]=("name","team_number")
         self.tree.heading('#0', text="Id")
         self.tree.column("name", width=150)
@@ -49,7 +50,7 @@ class FormTournament(Form):
             tourna = Tournament(None, name.get(), number_teams.get())
             try:
                 tournament = blt.create(tourna)
-                self.actualizarDatos()
+                self.update_view()
                 noti.destroy()
                 FormTeam(tournament, True)
                 form.destroy()
@@ -95,7 +96,7 @@ class FormTournament(Form):
         try:
             blt.delete(selectedTournament)
             self.tree.delete(*self.tree.get_children())
-            self.actualizarDatos()
+            self.update_view()
             Label(master=noti, text='torneo eliminado.').grid(row=0, column=0)
         except Exception as e:
             Label(master=noti, text=e).grid(row=0, column=0)
@@ -108,7 +109,7 @@ class FormTournament(Form):
             noti = Toplevel()
             try:
                 blt.update(Tournament(tournament.id, name.get(), tournament.contestants))
-                self.actualizarDatos()
+                self.update_view()
                 noti.destroy()
                 form.destroy()
 
@@ -139,7 +140,7 @@ class FormTournament(Form):
         e_name = Entry(form, textvariable=name)
         e_name.grid(row=0, column=1)
 
-    def actualizarDatos(self):
+    def update_view(self):
         self.tree.delete(*self.tree.get_children())
         for i in blt.get_all():
             self.tree.insert("", 'end', text=i[0], values=(i[1], i[2]))

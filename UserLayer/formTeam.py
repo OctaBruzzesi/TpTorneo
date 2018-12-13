@@ -7,12 +7,9 @@ from UserLayer.form import Form
 from UserLayer.Rounds import Rounds
 from Entities.Team import Team
 
-
-
-
-
 blt = BusinessLayerTeam()
 blTournament = BusinessLayerTournament()
+
 class FormTeam(Form):
     def __init__(self, tournament, show_selection):
 
@@ -54,8 +51,6 @@ class FormTeam(Form):
             self.button_start = Button(self.frame, text='Comenzar torneo', command=self.start_tournament)
             self.button_start.pack(side=LEFT, padx=6, pady=2)
 
-
-
             self.treeSelected.grid(row=1, column=3)
 
         self.button_save = Button(self.frame, text='Crear equipo', command=self.create_team)
@@ -80,7 +75,7 @@ class FormTeam(Form):
             for i in self.teams:
                 if(i.id == selectedTeam['text']):
                     self.teams.remove(i)
-                break
+                    break
             self.updateView()
         except Exception as e:
             noti = Toplevel()
@@ -125,7 +120,7 @@ class FormTeam(Form):
         e_name.grid(row=0, column=1)
 
     def select_team(self):
-        if(len(self.selectedTeams) < self.tournament.contestants):
+        if len(self.selectedTeams) < self.tournament.contestants:
             selectedTeam = super(FormTeam, self).get_select(self.tree)
             teamselec = blt.get_team(selectedTeam)
 
@@ -144,7 +139,7 @@ class FormTeam(Form):
         self.teams.append(team)
         for i in self.selectedTeams:
             
-            if(i.id == team.id):
+            if i.id == team.id:
                 self.selectedTeams.remove(i)
                 break
         self.updateView()
@@ -166,7 +161,7 @@ class FormTeam(Form):
                 noti.destroy()
                 form.destroy()
                 for i in self.teams:
-                    if(i.id == selectedTeam['text']):
+                    if(i.id == id):
                         self.teams.remove(i)
                     break
 
@@ -210,12 +205,10 @@ class FormTeam(Form):
         else:
             messagebox.showinfo("Aviso", "El toreno se creó para " + str(self.tournament.contestants)+ " equipos", parent=self.window)
 
-
     def updateView(self):
         self.tree.delete(*self.tree.get_children())
         for i in self.teams:
             self.tree.insert("", 'end', text=i.id, values=(i.team_name))
-
         if self.show_selection:
             self.treeSelected.delete(*self.treeSelected.get_children())
             for i in self.selectedTeams:

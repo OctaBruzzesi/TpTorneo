@@ -1,5 +1,4 @@
 from DataLayer.Connection import Connection
-from Entities.Tournament import Tournament
 from Entities.Match import Match
 
 

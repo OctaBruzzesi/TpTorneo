@@ -1,21 +1,14 @@
 from tkinter import *
 from tkinter import ttk
-from BusinessLayer.BusinessLayerTournament import BusinessLayerTournament
-from BusinessLayer.BusinessLayerTeam import BusinessLayerTeam
 from BusinessLayer.BusinessLayerMatch import BusinessLayerMatch
 from UserLayer.form import Form
 
 
-blt = BusinessLayerTeam()
-blTournament = BusinessLayerTournament()
 blm = BusinessLayerMatch()
 
 
 class FormMatch(Form):
     def __init__(self, tournament, range_matches):
-
-        self.selectedTeams = []
-        self.teams = blt.get_all()
 
         self.window = Tk()
 

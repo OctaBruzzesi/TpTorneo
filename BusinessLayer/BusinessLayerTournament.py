@@ -14,8 +14,6 @@ class BusinessLayerTournament:
     def create(self, tournament):
         if tournament.tournament_name is None:
             raise Exception("El torneo debe tener nombre")
-        #if dlt.search(tournament.tournament_name) == True:
-            #raise Exception("Ya existe un torneo con ese nombre")
         if len(tournament.tournament_name) < 3:
             raise Exception("El nombre debe tener mas de 3 caracteres")
         if tournament.contestants != 4 and tournament.contestants != 8 and tournament.contestants != 16 and tournament.contestants != 32:
@@ -36,8 +34,6 @@ class BusinessLayerTournament:
     def update(self, tournament):
         if tournament.tournament_name is None:
             raise Exception("El torneo debe tener nombre")
-        #if dlt.search(tournament.tournament_name) == True:
-            #raise Exception("Ya existe un torneo con ese nombre")
         if len(tournament.tournament_name) < 3:
             raise Exception("El nombre debe tener mas de 3 caracteres")
         return dlt.update_tournament(tournament)
