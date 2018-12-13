@@ -37,6 +37,8 @@ class Menu:
 
             tree = ttk.Treeview(vista)
 
+            tree.pack()
+
             tree["columns"] = ("name_team", "name_tournament")
             tree.heading('#0', text="Id")
             tree.column("name_team", width=150)
@@ -45,6 +47,7 @@ class Menu:
             tree.heading("name_tournament", text="Nombre del Torneo")
 
             finals = blm.get_finals()
+            print(finals[0].id, finals[0].score_team_1)
             for i in finals:
                 tournament = blt.get_tournament(i.id_tournament)
                 if i.score_team_1 > i.score_team_2:
