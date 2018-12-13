@@ -57,4 +57,8 @@ class DataLayerMatch:
         self.con.execute(query)
         return True
 
-
+    def get_finals(self):
+        query = "SELECT * FROM tournaments.match WHERE id_phase = 1"
+        self.con.execute(query)
+        finals = self.con.cur.fetchall()
+        return finals

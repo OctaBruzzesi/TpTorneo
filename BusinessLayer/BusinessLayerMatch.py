@@ -35,4 +35,7 @@ class BusinessLayerMatch:
         return dlm.get_match(id)
 
     def get_matches(self, tournament, range_matches):
-        return (dlm.get_matches(tournament, range_matches))
+        return dlm.get_matches(tournament, range_matches)
+
+    def get_finals(self):
+        return dlm.get_finals()
