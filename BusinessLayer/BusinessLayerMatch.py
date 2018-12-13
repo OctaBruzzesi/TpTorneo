@@ -39,3 +39,6 @@ class BusinessLayerMatch:
 
     def get_finals(self):
         return dlm.get_finals()
+
+    def get_pendings(self):
+        return dlm.get_pendings()

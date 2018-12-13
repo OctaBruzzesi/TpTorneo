@@ -65,3 +65,9 @@ class DataLayerMatch:
         for i in finals:
             matches.append(Match(i[0], i[1], i[2], i[3], i[4], i[5], i[6]))
         return matches
+
+    def get_pendings(self):
+        query = "SELECT id_tournament FROM tournaments.match WHERE id_phase = 1 AND score_team_1 IS NULL AND score_team_2 IS NULL"
+        self.con.execute(query)
+        pendings = self.con.cur.fetchall()
+        return pendings

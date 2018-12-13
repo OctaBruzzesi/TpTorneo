@@ -5,6 +5,9 @@ from BusinessLayer.BusinessLayerMatch import BusinessLayerMatch
 from BusinessLayer.BusinessLayerTournament import  BusinessLayerTournament
 from BusinessLayer.BusinessLayerTeam import BusinessLayerTeam
 
+blm = BusinessLayerMatch()
+blt = BusinessLayerTournament()
+bltm = BusinessLayerTeam()
 
 class Menu:
     def __init__(self):
@@ -31,18 +34,12 @@ class Menu:
 
             vista = Toplevel()
 
-            blm = BusinessLayerMatch()
-            blt = BusinessLayerTournament()
-            bltm = BusinessLayerTeam()
-
             tree = ttk.Treeview(vista)
 
-            tree["columns"] = ("name_team", "name_tournament")
-            tree.heading('#0', text="Id")
+            tree["columns"] = ("name_team")
+            tree.heading('#0', text="Nombre del torneo")
             tree.column("name_team", width=150)
             tree.heading("name_team", text="Nombre del Equipo")
-            tree.column("name_tournament", width=150)
-            tree.heading("name_tournament", text="Nombre del Torneo")
             tree.pack()
 
             finals = blm.get_finals()
@@ -52,17 +49,30 @@ class Menu:
                     team_win = bltm.get_team(i.team_1)
                 else:
                     team_win = bltm.get_team(i.team_2)
-                tree.insert('', 'end', text='', values=(team_win.team_name,tournament.tournament_name))
+                tree.insert('', 'end', text=tournament.tournament_name, values=team_win.team_name)
+
+        def pending_tournaments():
+            vista = Toplevel()
+
+            tree = ttk.Treeview(vista)
+
+            tree["columns"] = ("name_team")
+            tree.heading('#0', text="Id Torneo")
+            tree.column("name_team", width=150)
+            tree.heading("name_team", text="Nombre del Torneo")
+            tree.pack()
+            pendings = blm.get_pendings()
+            for i in pendings:
+                tournament = blt.get_tournament(i[0])
+                tree.insert('', 'end', text=tournament.id, values=tournament.tournament_name)
+
+
 
         form = Toplevel()
-        button = ttk.Button(form, text="Torneos Ganadores", command=tournaments_win)
-
+        button = ttk.Button(form, text="Equipos Campeones", command=tournaments_win)
         button.pack()
-        button2 = ttk.Button(form, text="sarasa")
-
-        button2.pack()
-
-
+        button2 = ttk.Button(form, text="Torneos no finalizados", command= pending_tournaments)
+        button2.pack(pady=10, padx=125)
 
 
     def open_tournament(self):
