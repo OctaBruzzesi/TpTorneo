@@ -9,7 +9,7 @@ from Entities.Team import Team
 blt = BusinessLayerTeam()
 blTournament = BusinessLayerTournament()
 class FormTeam:
-    def __init__(self, tournament):
+    def __init__(self, tournament, show_selection):
 
         self.selectedTeams = []
         self.teams = blt.get_all()
@@ -19,20 +19,39 @@ class FormTeam:
 
         self.tree = ttk.Treeview(self.window)
 
+        self.show_selection = show_selection
+
+        self.frame = Frame(self.window, width=1500, height=100)
+        self.frame.grid(row=2, column=1)
+
         self.tree["columns"] = "name"
         self.tree.heading('#0', text="Id")
         self.tree.column("name", width=150)
         self.tree.heading("name", text="Nombre")
 
-        self.treeSelected = ttk.Treeview(self.window)
+        if self.show_selection:
+            self.treeSelected = ttk.Treeview(self.window)
 
-        self.treeSelected["columns"] = "name"
-        self.treeSelected.heading('#0', text="Id")
-        self.treeSelected.column("name", width=150)
-        self.treeSelected.heading("name", text="Nombre")
+            self.treeSelected["columns"] = "name"
+            self.treeSelected.heading('#0', text="Id")
+            self.treeSelected.column("name", width=150)
+            self.treeSelected.heading("name", text="Nombre")
 
-        self.frame = Frame(self.window, width=1500, height=100)
-        self.frame.grid(row=2, column=1)
+            self.selectFrame = Frame(self.window, width=150, height=300)
+            self.selectFrame.grid(row=1, column=2)
+
+            self.button_select = Button(self.selectFrame, text='>>>>>', command=self.select_team)
+            self.button_select.pack(side=LEFT, padx=6, pady=2)
+
+            self.button_remove = Button(self.selectFrame, fg="red", text='<<<<<', command=self.remove_team)
+            self.button_remove.pack(side=LEFT, padx=6, pady=2)
+
+            self.button_start = Button(self.frame, text='Comenzar torneo', command=self.start_tournament)
+            self.button_start.pack(side=LEFT, padx=6, pady=2)
+
+
+
+            self.treeSelected.grid(row=1, column=3)
 
         self.button_save = Button(self.frame, text='Crear equipo', command=self.create_team)
         self.button_save.pack(side=LEFT, padx=6, pady=2)
@@ -43,20 +62,8 @@ class FormTeam:
         self.button_update = Button(self.frame, text='Editar Equipo', command=self.update_team)
         self.button_update.pack(side=LEFT, padx=6, pady=2)
 
-        self.selectFrame = Frame(self.window, width=150, height=300)
-        self.selectFrame.grid(row=1, column=2)
-
-        self.button_select = Button(self.selectFrame, text='>>>>>', command=self.select_team)
-        self.button_select.pack(side=LEFT, padx=6, pady=2)
-
-        self.button_remove = Button(self.selectFrame,fg="red", text='<<<<<', command=self.remove_team)
-        self.button_remove.pack(side=LEFT, padx=6, pady=2)
-
-        self.button_start = Button(self.frame, text='Comenzar torneo', command=self.start_tournament)
-        self.button_start.pack(side=LEFT, padx=6, pady=2)
-
         self.tree.grid(row=1, column=1)
-        self.treeSelected.grid(row=1, column=3)
+
         self.updateView()
         self.tournament = tournament
 
@@ -204,8 +211,10 @@ class FormTeam:
 
     def updateView(self):
         self.tree.delete(*self.tree.get_children())
-        self.treeSelected.delete(*self.treeSelected.get_children())
         for i in self.teams:
             self.tree.insert("", 'end', text=i.id, values=(i.team_name))
-        for i in self.selectedTeams:
-            self.treeSelected.insert("", 'end', text=i.id, values=(i.team_name))
+
+        if self.show_selection:
+            self.treeSelected.delete(*self.treeSelected.get_children())
+            for i in self.selectedTeams:
+                self.treeSelected.insert("", 'end', text=i.id, values=(i.team_name))

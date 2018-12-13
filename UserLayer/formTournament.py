@@ -50,7 +50,7 @@ class FormTournament:
                 tournament = blt.create(tourna)
                 self.actualizarDatos()
                 noti.destroy()
-                FormTeam(tournament)
+                FormTeam(tournament, True)
                 form.destroy()
 
             except Exception as e:

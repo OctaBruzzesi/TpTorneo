@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from UserLayer.formTournament import FormTournament
+from UserLayer.formTeam import FormTeam
 
 
 class Menu:
@@ -14,7 +15,7 @@ class Menu:
         button = ttk.Button(self.window, text="Lista de Torneos", command=self.open_tournament)
         button.pack()
 
-        button2 = ttk.Button(self.window, text="Lista de Equipos")
+        button2 = ttk.Button(self.window, text="Lista de Equipos", command=self.open_team)
         button2.pack()
 
         button3 = ttk.Button(self.window, text="Informes")
@@ -24,5 +25,8 @@ class Menu:
 
     def open_tournament(self):
         FormTournament()
+
+    def open_team(self):
+        FormTeam(None, False)
 
 Menu()
